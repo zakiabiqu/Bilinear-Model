@@ -139,7 +139,7 @@ df$jenis <- factor(df$jenis, levels = c("Actual", "Fitted (training)", "Forecast
 ggplot(df, aes(x = tahun, y = nilai, colour = jenis)) +
   geom_line(linewidth = 0.6, na.rm = TRUE) +
   geom_vline(xintercept = max(time(train)) + 0.5, linetype = "dashed", colour = "grey60") +
-  scale_colour_manual(values = c("Aktual" = "black", "Fitted (training)" = "#2a78d6",
+  scale_colour_manual(values = c("Actual" = "black", "Fitted (training)" = "#2a78d6",
                                  "Forecast (testing)" = "#eb6834")) +
   labs(x = "Year", y = "Sunspot Number", colour = NULL) +
   theme_minimal() +
