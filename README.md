@@ -34,7 +34,7 @@ In this README a model is written as **BL(K, C, B)**, for example
 
 ```r
 # install.packages("remotes")
-remotes::install_github("zakiabiqu/bilinear")
+remotes::install_github("zakiabiqu/Bilinear-Model")
 ```
 
 ## Quick start
