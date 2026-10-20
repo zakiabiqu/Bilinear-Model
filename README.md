@@ -16,12 +16,12 @@ against the published results of Subba Rao & Gabr (1984).
 
 ## The model
 
-$$
-X_t + \sum_{k \in K} a_k X_{t-k}
-= \alpha + \sum_{l \in C} c_l\, e_{t-l}
-+ \sum_{(i,j) \in B} b_{ij}\, X_{t-i}\, e_{t-j} + e_t ,
-\qquad e_t \sim \text{iid } (0, \sigma^2)
-$$
+```math
+   X_t + \sum_{k \in K} a_k X_{t-k}
+   = \alpha + \sum_{l \in C} c_l\, e_{t-l}
+   + \sum_{(i,j) \in B} b_{ij}\, X_{t-i}\, e_{t-j} + e_t ,
+   \qquad e_t \sim \text{iid } (0, \sigma^2)
+```
 
 - `ar` = set of AR lags $K$ (note the sign convention: $a_1 = -\phi_1$)
 - `ma` = set of MA lags $C$
