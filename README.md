@@ -130,18 +130,18 @@ fitS <- bilinear(train, ar = c(1, 2, 9), gamma = 10,
 fc <- predict(fitS, n.ahead = length(test), seed = 123)
 
 df <- rbind(
-  data.frame(tahun = as.numeric(time(sun)),   nilai = as.numeric(sun),                jenis = "Aktual"),
+  data.frame(tahun = as.numeric(time(sun)),   nilai = as.numeric(sun),                jenis = "Actual"),
   data.frame(tahun = as.numeric(time(train)), nilai = as.numeric(fitS$fitted.values), jenis = "Fitted (training)"),
   data.frame(tahun = as.numeric(time(test)),  nilai = as.numeric(fc$pred),            jenis = "Forecast (testing)")
 )
-df$jenis <- factor(df$jenis, levels = c("Aktual", "Fitted (training)", "Forecast (testing)"))
+df$jenis <- factor(df$jenis, levels = c("Actual", "Fitted (training)", "Forecast (testing)"))
 
 ggplot(df, aes(x = tahun, y = nilai, colour = jenis)) +
   geom_line(linewidth = 0.6, na.rm = TRUE) +
   geom_vline(xintercept = max(time(train)) + 0.5, linetype = "dashed", colour = "grey60") +
   scale_colour_manual(values = c("Aktual" = "black", "Fitted (training)" = "#2a78d6",
                                  "Forecast (testing)" = "#eb6834")) +
-  labs(x = "Tahun", y = "Bilangan sunspot", colour = NULL) +
+  labs(x = "Year", y = "Sunspot Number", colour = NULL) +
   theme_minimal() +
   theme(legend.position = "top")
 ```
