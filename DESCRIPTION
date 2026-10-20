@@ -11,8 +11,8 @@ Description: Estimation, residual diagnostics and forecasting for subset
     iterations with step-halving; multi-step forecasts are computed by
     Monte Carlo simulation of the conditional expectation.
 License: MIT + file LICENSE
-URL: https://github.com/zakiabiqu/bilinear
-BugReports: https://github.com/zakiabiqu/bilinear/issues
+URL: https://github.com/zakiabiqu/Bilinear-Model
+BugReports: https://github.com/zakiabiqu/Bilinear-Model/issues
 Encoding: UTF-8
 Depends: R (>= 4.1.0)
 Imports: stats
