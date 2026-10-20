@@ -116,6 +116,36 @@ The fitted object holds everything needed for plotting (`fit$x`,
 The figure below uses a 70:30 training/testing split of the 1700–1955 sunspot
 series (code in [`tools/make-readme-figures.R`](tools/make-readme-figures.R)).
 
+```R
+library(ggplot2)
+
+sun <- window(sunspot.year, 1700, 1955)
+n_train <- floor(0.7 * length(sun))
+train <- window(sun, end = time(sun)[n_train])
+test  <- window(sun, start = time(sun)[n_train + 1])
+
+fitS <- bilinear(train, ar = c(1, 2, 9), gamma = 10,
+                 bl = list(c(2, 1), c(8, 1), c(1, 3), c(4, 3), c(1, 6), c(2, 4), c(3, 2)))
+
+fc <- predict(fitS, n.ahead = length(test), seed = 123)
+
+df <- rbind(
+  data.frame(tahun = as.numeric(time(sun)),   nilai = as.numeric(sun),                jenis = "Aktual"),
+  data.frame(tahun = as.numeric(time(train)), nilai = as.numeric(fitS$fitted.values), jenis = "Fitted (training)"),
+  data.frame(tahun = as.numeric(time(test)),  nilai = as.numeric(fc$pred),            jenis = "Forecast (testing)")
+)
+df$jenis <- factor(df$jenis, levels = c("Aktual", "Fitted (training)", "Forecast (testing)"))
+
+ggplot(df, aes(x = tahun, y = nilai, colour = jenis)) +
+  geom_line(linewidth = 0.6, na.rm = TRUE) +
+  geom_vline(xintercept = max(time(train)) + 0.5, linetype = "dashed", colour = "grey60") +
+  scale_colour_manual(values = c("Aktual" = "black", "Fitted (training)" = "#2a78d6",
+                                 "Forecast (testing)" = "#eb6834")) +
+  labs(x = "Tahun", y = "Bilangan sunspot", colour = NULL) +
+  theme_minimal() +
+  theme(legend.position = "top")
+```
+
 ![Sunspot: fitted and forecast values](man/figures/README-forecast.png)
 
 ## Validation against Subba Rao & Gabr (1984)
