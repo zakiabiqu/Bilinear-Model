@@ -19,41 +19,41 @@
 \method{print}{bilinear_forecast}(x, digits = 4, ...)
 }
 \arguments{
-\item{object}{A `"bilinear"` object.}
+\item{object}{A \code{"bilinear"} object.}
 
 \item{n.ahead}{Forecast horizon.}
 
 \item{nsim}{Number of simulated paths for \eqn{h \ge 2}.}
 
-\item{innov}{Source of future errors: `"normal"` draws from
-\eqn{N(0, \hat\sigma^2)}; `"bootstrap"` resamples the residuals (useful when
+\item{innov}{Source of future errors: \code{"normal"} draws from
+\eqn{N(0, \hat\sigma^2)}; \code{"bootstrap"} resamples the residuals (useful when
 residual normality is rejected).}
 
 \item{level}{Confidence levels (in percent) of the prediction intervals.}
 
 \item{newx}{Optional out-of-sample observations following the data. If given,
 rolling one-step forecasts are computed for them with the parameters held
-fixed, and returned in `onestep`.}
+fixed, and returned in \code{onestep}.}
 
 \item{seed}{Optional random seed for reproducible Monte Carlo results.}
 
 \item{...}{Not used.}
 
-\item{x}{A `"bilinear_forecast"` object.}
+\item{x}{A \code{"bilinear_forecast"} object.}
 
 \item{digits}{Number of decimal places.}
 }
 \value{
-An object of class `"bilinear_forecast"`, a list with `pred`, `se`,
-  `lower`, `upper` (one column per level), `level`, `n.ahead`, `nsim`,
-  `innov` and `onestep` (a table of actual values, forecasts and errors, and
-  their mean squared error, or `NULL`).
+An object of class \code{"bilinear_forecast"}, a list with \code{pred}, \code{se},
+\code{lower}, \code{upper} (one column per level), \code{level}, \code{n.ahead}, \code{nsim},
+\code{innov} and \code{onestep} (a table of actual values, forecasts and errors, and
+their mean squared error, or \code{NULL}).
 }
 \description{
-Computes \eqn{E(X_{N+h} | X_1, \dots, X_N)} for \eqn{h = 1, \dots,} `n.ahead`.
+Computes \eqn{E(X_{N+h} | X_1, \dots, X_N)} for \eqn{h = 1, \dots,} \code{n.ahead}.
 The one-step forecast is exact. For \eqn{h \ge 2}, the conditional expectation
 involves products of future values and future errors, so it is evaluated by
-Monte Carlo: `nsim` future paths are simulated from the fitted model and
+Monte Carlo: \code{nsim} future paths are simulated from the fitted model and
 averaged. Prediction intervals are the empirical quantiles of the simulated
 paths, because forecast distributions of bilinear models are usually not
 symmetric.

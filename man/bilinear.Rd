@@ -21,16 +21,16 @@ bilinear(
 )
 }
 \arguments{
-\item{x}{A numeric vector or `ts` object without missing values.}
+\item{x}{A numeric vector or \code{ts} object without missing values.}
 
-\item{ar}{Integer vector of AR lags (the set \eqn{K}), e.g. `c(1, 2, 9)`.
-`NULL` for no AR part.}
+\item{ar}{Integer vector of AR lags (the set \eqn{K}), e.g. \code{c(1, 2, 9)}.
+\code{NULL} for no AR part.}
 
-\item{ma}{Integer vector of MA lags (the set \eqn{C}). `NULL` for no MA part.}
+\item{ma}{Integer vector of MA lags (the set \eqn{C}). \code{NULL} for no MA part.}
 
-\item{bl}{A list of lag pairs `c(i, j)`, one per bilinear term
-\eqn{b_{ij} X_{t-i} e_{t-j}}, e.g. `list(c(2, 1), c(8, 1))`. A single pair
-may be given as `c(i, j)`. `NULL` for no bilinear part.}
+\item{bl}{A list of lag pairs \code{c(i, j)}, one per bilinear term
+\eqn{b_{ij} X_{t-i} e_{t-j}}, e.g. \code{list(c(2, 1), c(8, 1))}. A single pair
+may be given as \code{c(i, j)}. \code{NULL} for no bilinear part.}
 
 \item{intercept}{Logical; include the constant \eqn{\alpha}?}
 
@@ -39,15 +39,15 @@ Defaults to the largest lag in the model. Use the same value for every
 model you want to compare by AIC, so that all of them use the same sample.}
 
 \item{start}{Optional numeric vector of starting values, in the order
-`a`, `c`, `b`, `alpha`, on the original scale of `x`.}
+\code{a}, \code{c}, \code{b}, \code{alpha}, on the original scale of \code{x}.}
 
 \item{b_grid}{Starting values tried for each new bilinear coefficient, in
-units of `1 / sd(x)`.}
+units of \code{1 / sd(x)}.}
 
 \item{c_grid}{Starting values tried for each new MA coefficient.}
 
-\item{scale}{Divide `x` by this constant before estimation (useful when
-`x` is large, which makes `b` very small). Results are returned on the
+\item{scale}{Divide \code{x} by this constant before estimation (useful when
+\code{x} is large, which makes \code{b} very small). Results are returned on the
 original scale.}
 
 \item{tol}{Convergence tolerance on the relative change of \eqn{Q}.}
@@ -57,19 +57,37 @@ original scale.}
 \item{trace}{Logical; print \eqn{Q} at every iteration of the final fit.}
 }
 \value{
-An object of class `"bilinear"`, a list with components
-\describe{
-  \item{coef, se, zvalue, pvalue}{Estimates, standard errors, z statistics and two-sided p-values.}
-  \item{vcov}{Approximate covariance matrix \eqn{\hat\sigma^2 (J'J)^{-1}}.}
-  \item{sigma2, rss}{Residual variance \eqn{Q/n} and \eqn{Q}.}
-  \item{loglik, aic, naic}{Conditional log-likelihood, \eqn{AIC = n \log\hat\sigma^2 + 2q} and \eqn{AIC/n}.}
-  \item{n, N, gamma, npar}{Number of residuals, observations, \eqn{\gamma} and parameters.}
-  \item{residuals, fitted.values}{Residuals and fitted values (`NA` for \eqn{t \le \gamma}).}
-  \item{converged, iter, history}{Convergence flag, number of iterations and the parameter/\eqn{Q} path.}
-  \item{invertibility}{`log10delta`, the growth of a perturbation of the starting residuals, and `invertible = log10delta < 0`.}
-  \item{jacobian}{The matrix \eqn{J} of derivatives \eqn{\partial e_t/\partial\theta} at the estimate.}
-  \item{model, x, call}{Model specification, data and call.}
-}
+A list of class \code{"bilinear"} with components:
+\item{coef}{a named vector of the estimated AR, MA and bilinear coefficients
+and the intercept, which can be extracted by the \code{\link[=coef]{coef()}} method.}
+\item{se}{the approximate standard errors of \code{coef}.}
+\item{zvalue}{the z statistics, \code{coef / se}.}
+\item{pvalue}{the two-sided p-values of the z tests of \eqn{H_0: \theta = 0}.}
+\item{vcov}{the approximate variance matrix of \code{coef},
+\eqn{\hat\sigma^2 (J'J)^{-1}}, which can be extracted by the \code{\link[=vcov]{vcov()}} method.}
+\item{sigma2}{the conditional MLE of the innovations variance, \code{rss / n}.}
+\item{rss}{the residual sum of squares \eqn{Q}.}
+\item{loglik}{the maximized conditional Gaussian log-likelihood.}
+\item{aic}{the AIC value, \eqn{n \log\hat\sigma^2 + 2q}.}
+\item{naic}{the normalized AIC, \code{aic / n}.}
+\item{n}{the number of residuals used in the fitting, \code{N - gamma}.}
+\item{N}{the number of observations in \code{x}.}
+\item{gamma}{the number of initial observations not used in the fitting.}
+\item{npar}{the number of estimated parameters \eqn{q} (including the intercept).}
+\item{residuals}{the fitted innovations, \code{NA} for the first \code{gamma} observations.}
+\item{fitted.values}{the one-step fitted values \code{x - residuals}.}
+\item{converged}{logical: did the Gauss-Newton iteration converge?}
+\item{iter}{the number of iterations used.}
+\item{history}{a matrix with the parameter values and \eqn{Q} at each iteration.}
+\item{invertibility}{a list with \code{log10delta}, the log10 size at the end of
+the series of a unit perturbation of the starting residuals, and
+\code{invertible}, which is \code{TRUE} when \code{log10delta < 0}.}
+\item{jacobian}{the matrix \eqn{J} of derivatives \eqn{\partial e_t / \partial\theta}
+at the estimates.}
+\item{model}{a list giving the model specification: \code{ar}, \code{ma}, \code{bl},
+\code{intercept} and \code{scale}.}
+\item{x}{the series used in the fitting.}
+\item{call}{the matched call.}
 }
 \description{
 Estimates the parameters of a (subset) bilinear time series model
@@ -85,15 +103,15 @@ minimised with Gauss-Newton iterations. The derivatives
 \eqn{\partial e_t / \partial \theta} are computed exactly by recursion, and every
 step is protected by step-halving.
 
-When `start` is not given, starting values are built in stages: the AR part
+When \code{start} is not given, starting values are built in stages: the AR part
 and the intercept come from ordinary least squares, then MA terms and
 bilinear terms are added one at a time, in the order given, each with a small
 grid of starting values. A grid point other than zero is only accepted if it
-lowers \eqn{Q} *and* gives an invertible model. Because of this, the order of
-the pairs in `bl` can change the local minimum that is reached.
+lowers \eqn{Q} \emph{and} gives an invertible model. Because of this, the order of
+the pairs in \code{bl} can change the local minimum that is reached.
 
 Note the sign convention: AR coefficients sit on the left-hand side, so a
-model written as \eqn{X_t = 0.4 X_{t-1} + \dots} has `a1 = -0.4`.
+model written as \eqn{X_t = 0.4 X_{t-1} + \dots} has \code{a1 = -0.4}.
 }
 \examples{
 sun <- window(sunspot.year, 1700, 1920)
@@ -109,10 +127,10 @@ small <- bilinear(x, ar = 1, bl = list(c(1, 1)), intercept = FALSE,
 small$history
 }
 \references{
-Subba Rao, T. and Gabr, M. M. (1984). *An Introduction to Bispectral
-Analysis and Bilinear Time Series Models*. Lecture Notes in Statistics 24.
+Subba Rao, T. and Gabr, M. M. (1984). \emph{An Introduction to Bispectral
+Analysis and Bilinear Time Series Models}. Lecture Notes in Statistics 24.
 Springer. \doi{10.1007/978-1-4684-6318-7}
 }
 \seealso{
-[summary.bilinear()], [predict.bilinear()]
+\code{\link[=summary.bilinear]{summary.bilinear()}}, \code{\link[=predict.bilinear]{predict.bilinear()}}
 }

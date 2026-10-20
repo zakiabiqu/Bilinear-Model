@@ -11,13 +11,13 @@
 \method{vcov}{bilinear}(object, ...)
 }
 \arguments{
-\item{object}{A `"bilinear"` object.}
+\item{object}{A \code{"bilinear"} object.}
 
 \item{...}{Not used.}
 }
 \value{
-`coef()` returns the named vector of estimates; `vcov()` returns the
-  approximate covariance matrix \eqn{\hat\sigma^2 (J'J)^{-1}}.
+\code{coef()} returns the named vector of estimates; \code{vcov()} returns the
+approximate covariance matrix \eqn{\hat\sigma^2 (J'J)^{-1}}.
 }
 \description{
 Extract coefficients and covariance of a bilinear model

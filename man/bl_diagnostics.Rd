@@ -7,23 +7,23 @@
 bl_diagnostics(object, lag = 10)
 }
 \arguments{
-\item{object}{A `"bilinear"` object.}
+\item{object}{A \code{"bilinear"} object.}
 
 \item{lag}{Number of lags for the Ljung-Box test and the autocorrelation sums.}
 }
 \value{
-A data frame with columns `Statistic`, `Distribution` and `p.value`.
+A data frame with columns \code{Statistic}, \code{Distribution} and \code{p.value}.
 }
 \description{
-Computes the tests reported by [summary.bilinear()]:
+Computes the tests reported by \code{\link[=summary.bilinear]{summary.bilinear()}}:
 \itemize{
-  \item the independence test \eqn{W} on the squared residuals,
-    \eqn{H_0: \rho_{e^2}(1) = 0}, approximately \eqn{N(0,1)};
-  \item Lomnicki's skewness and kurtosis tests \eqn{u_1} (\eqn{H_0: \gamma_1 = 0})
-    and \eqn{u_2} (\eqn{H_0: \gamma_2 = 0}), each approximately \eqn{N(0,1)},
-    using \eqn{Var(G_1) = (6/N)\sum\rho^2} and \eqn{Var(G_2) = (24/N)\sum\rho^4};
-  \item the joint normality statistic \eqn{u_1^2 + u_2^2}, approximately \eqn{\chi^2_2};
-  \item the Ljung-Box test on the residuals.
+\item the independence test \eqn{W} on the squared residuals,
+\eqn{H_0: \rho_{e^2}(1) = 0}, approximately \eqn{N(0,1)};
+\item Lomnicki's skewness and kurtosis tests \eqn{u_1} (\eqn{H_0: \gamma_1 = 0})
+and \eqn{u_2} (\eqn{H_0: \gamma_2 = 0}), each approximately \eqn{N(0,1)},
+using \eqn{Var(G_1) = (6/N)\sum\rho^2} and \eqn{Var(G_2) = (24/N)\sum\rho^4};
+\item the joint normality statistic \eqn{u_1^2 + u_2^2}, approximately \eqn{\chi^2_2};
+\item the Ljung-Box test on the residuals.
 }
 }
 \examples{

@@ -45,19 +45,37 @@
 #' @param maxit Maximum number of Gauss-Newton iterations.
 #' @param trace Logical; print \eqn{Q} at every iteration of the final fit.
 #'
-#' @return An object of class `"bilinear"`, a list with components
-#' \describe{
-#'   \item{coef, se, zvalue, pvalue}{Estimates, standard errors, z statistics and two-sided p-values.}
-#'   \item{vcov}{Approximate covariance matrix \eqn{\hat\sigma^2 (J'J)^{-1}}.}
-#'   \item{sigma2, rss}{Residual variance \eqn{Q/n} and \eqn{Q}.}
-#'   \item{loglik, aic, naic}{Conditional log-likelihood, \eqn{AIC = n \log\hat\sigma^2 + 2q} and \eqn{AIC/n}.}
-#'   \item{n, N, gamma, npar}{Number of residuals, observations, \eqn{\gamma} and parameters.}
-#'   \item{residuals, fitted.values}{Residuals and fitted values (`NA` for \eqn{t \le \gamma}).}
-#'   \item{converged, iter, history}{Convergence flag, number of iterations and the parameter/\eqn{Q} path.}
-#'   \item{invertibility}{`log10delta`, the growth of a perturbation of the starting residuals, and `invertible = log10delta < 0`.}
-#'   \item{jacobian}{The matrix \eqn{J} of derivatives \eqn{\partial e_t/\partial\theta} at the estimate.}
-#'   \item{model, x, call}{Model specification, data and call.}
-#' }
+#' @return A list of class `"bilinear"` with components:
+#' \item{coef}{a named vector of the estimated AR, MA and bilinear coefficients
+#'   and the intercept, which can be extracted by the [coef()] method.}
+#' \item{se}{the approximate standard errors of `coef`.}
+#' \item{zvalue}{the z statistics, `coef / se`.}
+#' \item{pvalue}{the two-sided p-values of the z tests of \eqn{H_0: \theta = 0}.}
+#' \item{vcov}{the approximate variance matrix of `coef`,
+#'   \eqn{\hat\sigma^2 (J'J)^{-1}}, which can be extracted by the [vcov()] method.}
+#' \item{sigma2}{the conditional MLE of the innovations variance, `rss / n`.}
+#' \item{rss}{the residual sum of squares \eqn{Q}.}
+#' \item{loglik}{the maximized conditional Gaussian log-likelihood.}
+#' \item{aic}{the AIC value, \eqn{n \log\hat\sigma^2 + 2q}.}
+#' \item{naic}{the normalized AIC, `aic / n`.}
+#' \item{n}{the number of residuals used in the fitting, `N - gamma`.}
+#' \item{N}{the number of observations in `x`.}
+#' \item{gamma}{the number of initial observations not used in the fitting.}
+#' \item{npar}{the number of estimated parameters \eqn{q} (including the intercept).}
+#' \item{residuals}{the fitted innovations, `NA` for the first `gamma` observations.}
+#' \item{fitted.values}{the one-step fitted values `x - residuals`.}
+#' \item{converged}{logical: did the Gauss-Newton iteration converge?}
+#' \item{iter}{the number of iterations used.}
+#' \item{history}{a matrix with the parameter values and \eqn{Q} at each iteration.}
+#' \item{invertibility}{a list with `log10delta`, the log10 size at the end of
+#'   the series of a unit perturbation of the starting residuals, and
+#'   `invertible`, which is `TRUE` when `log10delta < 0`.}
+#' \item{jacobian}{the matrix \eqn{J} of derivatives \eqn{\partial e_t / \partial\theta}
+#'   at the estimates.}
+#' \item{model}{a list giving the model specification: `ar`, `ma`, `bl`,
+#'   `intercept` and `scale`.}
+#' \item{x}{the series used in the fitting.}
+#' \item{call}{the matched call.}
 #'
 #' @references
 #' Subba Rao, T. and Gabr, M. M. (1984). *An Introduction to Bispectral

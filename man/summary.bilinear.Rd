@@ -10,21 +10,21 @@
 \method{print}{summary.bilinear}(x, digits = 6, ...)
 }
 \arguments{
-\item{object}{A `"bilinear"` object.}
+\item{object}{A \code{"bilinear"} object.}
 
 \item{lag}{Number of lags used in the Ljung-Box test and in the variance of
 the skewness and kurtosis statistics.}
 
 \item{...}{Not used.}
 
-\item{x}{A `"summary.bilinear"` object.}
+\item{x}{A \code{"summary.bilinear"} object.}
 
 \item{digits}{Number of significant digits.}
 }
 \value{
-An object of class `"summary.bilinear"`.
+An object of class \code{"summary.bilinear"}.
 }
 \description{
 Coefficient table with z tests, fit statistics and residual diagnostics
-(see [bl_diagnostics()]).
+(see \code{\link[=bl_diagnostics]{bl_diagnostics()}}).
 }

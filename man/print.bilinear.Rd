@@ -7,14 +7,14 @@
 \method{print}{bilinear}(x, digits = 6, ...)
 }
 \arguments{
-\item{x}{A `"bilinear"` object.}
+\item{x}{A \code{"bilinear"} object.}
 
 \item{digits}{Number of significant digits.}
 
 \item{...}{Not used.}
 }
 \value{
-`x`, invisibly.
+\code{x}, invisibly.
 }
 \description{
 Print a bilinear model

@@ -7,14 +7,14 @@
 \description{
 Estimation, diagnostics and forecasting for subset bilinear time series
 models in the sense of Subba Rao and Gabr (1984). The main function is
-[bilinear()]; see also [summary.bilinear()], [predict.bilinear()] and
-[bl_diagnostics()].
+\code{\link[=bilinear]{bilinear()}}; see also \code{\link[=summary.bilinear]{summary.bilinear()}}, \code{\link[=predict.bilinear]{predict.bilinear()}} and
+\code{\link[=bl_diagnostics]{bl_diagnostics()}}.
 }
 \seealso{
 Useful links:
 \itemize{
-  \item \url{https://github.com/zakiabiqu/bilinear}
-  \item Report bugs at \url{https://github.com/zakiabiqu/bilinear/issues}
+  \item \url{https://github.com/zakiabiqu/Bilinear-Model}
+  \item Report bugs at \url{https://github.com/zakiabiqu/Bilinear-Model/issues}
 }
 
 }
