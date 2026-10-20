@@ -1,0 +1,21 @@
+Package: bilinear
+Type: Package
+Title: Subset Bilinear Time Series Models
+Version: 0.1.0
+Authors@R: person("Zaki Abiyu", "Aqilah", email = "zakiabiqu@gmail.com", role = c("aut", "cre"))
+Description: Estimation, residual diagnostics and forecasting for subset
+    bilinear time series models with autoregressive, moving-average and
+    bilinear terms, following Subba Rao and Gabr (1984)
+    <doi:10.1007/978-1-4684-6318-7>. Parameters are estimated by conditional
+    least squares using exact recursive derivatives and Gauss-Newton
+    iterations with step-halving; multi-step forecasts are computed by
+    Monte Carlo simulation of the conditional expectation.
+License: MIT + file LICENSE
+URL: https://github.com/zakiabiqu/bilinear
+BugReports: https://github.com/zakiabiqu/bilinear/issues
+Encoding: UTF-8
+Depends: R (>= 4.1.0)
+Imports: stats
+Suggests: testthat (>= 3.0.0), ggplot2
+Config/testthat/edition: 3
+RoxygenNote: 7.3.1

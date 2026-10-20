@@ -1,0 +1,8 @@
+^LICENSE\.md$
+^README\.md$
+^NEWS\.md$
+^docs$
+^\.gitignore$
+^.*\.Rproj$
+^\.Rproj\.user$
+^tools$
